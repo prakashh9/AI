@@ -1,6 +1,6 @@
-# main.py
-
 import uvicorn
+import os
 
 if __name__ == "__main__":
-    uvicorn.run("backend.api.server:app", reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("backend.api.server:app", host="0.0.0.0", port=port)
