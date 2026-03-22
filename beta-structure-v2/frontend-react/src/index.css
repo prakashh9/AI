@@ -1,0 +1,11 @@
+@keyframes blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

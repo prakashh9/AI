@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beta Structure Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🛡️ Beta Structure SOC Dashboard</h1>
+
+  <div class="top-bar">
+    <button onclick="run()">🚀 Run Attack</button>
+    <button onclick="loadPending()">📌 Pending</button>
+    <button onclick="loadLogs()">📜 Logs</button>
+    <button onclick="loadCharts()">📊 Charts</button>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>📊 Result</h2>
+      <pre id="output"></pre>
+    </div>
+
+    <div class="card">
+      <h2>📌 Pending Approval</h2>
+      <div id="pending"></div>
+    </div>
+
+    <div class="card">
+      <h2>📜 Logs</h2>
+      <div id="logs"></div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Attack Trends</h2>
+      <canvas id="chart"></canvas>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
