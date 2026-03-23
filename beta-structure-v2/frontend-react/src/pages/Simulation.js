@@ -6,7 +6,7 @@ const scenarios = ["DDoS", "Malware", "Phishing"];
 export default function Simulation() {
   const [scenario, setScenario] = useState("DDoS");
   const [logs, setLogs] = useState([]);
-  const [status, setStatus] = useState({
+  const [status] = useState({
     traffic: "Normal",
     threat: "Low",
     firewall: "Active",

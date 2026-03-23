@@ -61,7 +61,7 @@ export default function Dashboard() {
 
       setLogs(logsData);
 
-      const hasCritical = logsData.some(l => l.includes("CRITICAL"));
+     
       
 
       // 📊 Chart
