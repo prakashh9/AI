@@ -6,7 +6,7 @@ const scenarios = ["DDoS", "Malware", "Phishing"];
 export default function Simulation() {
   const [scenario, setScenario] = useState("DDoS");
   const [logs, setLogs] = useState([]);
-  const [status] = useState({
+  const [status, setStatus] = useState({
     traffic: "Normal",
     threat: "Low",
     firewall: "Active",
@@ -117,31 +117,34 @@ function Node({ label, icon, top, left }) {
 
 
 /* 🔥 STATUS LOGIC */
-function updateStatus(scenario) {
+function updateStatus(scenario, setStatus) {
   switch (scenario) {
     case "DDoS":
-      return setGlobalStatus({
+      setStatus({
         traffic: "High",
         threat: "Critical",
         firewall: "Rate Limiting",
         system: "Under Load"
       });
+      break;
 
     case "Malware":
-      return setGlobalStatus({
+      setStatus({
         traffic: "Normal",
         threat: "High",
         firewall: "Scanning",
         system: "Compromised"
       });
+      break;
 
     case "Phishing":
-      return setGlobalStatus({
+      setStatus({
         traffic: "Normal",
         threat: "Medium",
         firewall: "Filtering",
         system: "At Risk"
       });
+      break;
 
     default:
       break;
@@ -149,7 +152,20 @@ function updateStatus(scenario) {
 }
 
 /* 🔧 GLOBAL STATUS HELPER */
-let setGlobalStatus = () => {};
+useEffect(() => {
+  const interval = setInterval(() => {
+    const log = generateLog(scenario);
+
+    setLogs((prev) => [
+      `[${new Date().toLocaleTimeString()}] ${log}`,
+      ...prev.slice(0, 5)
+    ]);
+
+    updateStatus(scenario, setStatus); // ✅ FIXED
+  }, 2000);
+
+  return () => clearInterval(interval);
+}, [scenario]);
 
 /* 🔥 LOG GENERATOR */
 function generateLog(scenario) {
