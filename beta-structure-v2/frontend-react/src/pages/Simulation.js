@@ -23,7 +23,7 @@ export default function Simulation() {
         ...prev.slice(0, 5)
       ]);
 
-      updateStatus(scenario);
+      updateStatus(scenario, setStatus); // ✅ correct usage
     }, 2000);
 
     return () => clearInterval(interval);
@@ -63,9 +63,6 @@ export default function Simulation() {
         <Node label="AI Engine" icon="🧠" top="20%" left="40%" />
         <Node label="Firewall" icon="🛡️" top="70%" left="40%" />
         <Node label="Server" icon="🖥️" top="50%" left="75%" />
-
-        {/* ⚡ STATIC CONNECTION LINES (NO RED DOT) */}
-       
       </div>
 
       {/* 📡 LOG PANEL */}
@@ -113,9 +110,6 @@ function Node({ label, icon, top, left }) {
   );
 }
 
-/* ⚡ STATIC LINE */
-
-
 /* 🔥 STATUS LOGIC */
 function updateStatus(scenario, setStatus) {
   switch (scenario) {
@@ -150,22 +144,6 @@ function updateStatus(scenario, setStatus) {
       break;
   }
 }
-
-/* 🔧 GLOBAL STATUS HELPER */
-useEffect(() => {
-  const interval = setInterval(() => {
-    const log = generateLog(scenario);
-
-    setLogs((prev) => [
-      `[${new Date().toLocaleTimeString()}] ${log}`,
-      ...prev.slice(0, 5)
-    ]);
-
-    updateStatus(scenario, setStatus); // ✅ FIXED
-  }, 2000);
-
-  return () => clearInterval(interval);
-}, [scenario]);
 
 /* 🔥 LOG GENERATOR */
 function generateLog(scenario) {
